@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Album, Artist
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 def album_list(request):
@@ -10,3 +12,16 @@ def album_list(request):
 def album_detail(request, pk):
     album = get_object_or_404(Album, pk=pk)
     return render(request, 'album/album_detail.html', {'album': album})
+
+def artist_create(request):
+    if request.method == 'POST':
+        artist_name = request.POST['artist_name']
+        Artist.objects.create(artist_name=artist_name)
+        return HttpResponseRedirect(reverse('artist_list'))
+    else:
+        return render(request, 'album/artist_create.html')
+
+def artist_list(request):
+    artists = Artist.objects.all()
+    context = {'artists': artists}
+    return render(request, 'album/artist_list.html', context)

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="POST">
+    {% csrf_token %}
+
+    <label for="artist_name">Artist</label>
+    <input type="text" name="artist_name" id="artist_name" required>
+
+    <button type="submit">Create</button>
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Artists</h1>
+
+    <ul>
+    {% for artist in artists %}
+    	<li>{{ artist.artist_name }}</li>
+    {% endfor %}
+    </ul>
+
+    <a href="{% url 'album_list' %}">Return to Album List</a>
+
+{% endblock %}
