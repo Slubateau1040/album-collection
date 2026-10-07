@@ -7,7 +7,7 @@ class Artist(models.Model):
         return self.artist_name
 
 class Album(models.Model):
-    album_title = models.CharField(max_length=200)
+    album_name = models.CharField(max_length=200)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     cover = models.ImageField(upload_to='cover/')
-    release_date = models.DateField()
+    date = models.DateField()

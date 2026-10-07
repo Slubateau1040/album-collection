@@ -2,9 +2,14 @@
 
 {% block content %}
 
-    <h1>{{ album.album_title }}</h1>
+    <h1>{{ album.album_name }}</h1>
     <p>{{ album.artist.artist_name }}</p>
-    <p>{{ album.release_date }}</p>
-    <img src="{{ album.cover.url }}" alt="{{ album.album_title }}">
+    <p>{{ album.date }}</p>
+    <img src="{{ album.cover.url }}" alt="{{ album.album_name }}">
+
+    <form action="{% url 'album_delete' album.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+    </form>
 
 {% endblock %}

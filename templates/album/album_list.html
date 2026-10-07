@@ -6,11 +6,12 @@
 
     {% for album in albums %}
     	<li>
-        <a href="{% url 'album_detail' album.id %}">{{ album.album_title }}</a>
+        <a href="{% url 'album_detail' album.id %}">{{ album.album_name }}</a>
         </li>
     {% endfor %}
 
     <a href="{% url 'artist_create' %}">Add Artist</a>
+    <a href="{% url 'album_create' %}">Add Album</a>
     <a href="{% url 'artist_list' %}">Artist list</a>
 
 {% endblock %}

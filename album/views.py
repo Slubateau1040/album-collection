@@ -25,3 +25,20 @@ def artist_list(request):
     artists = Artist.objects.all()
     context = {'artists': artists}
     return render(request, 'album/artist_list.html', context)
+
+def album_create(request):
+    if request.method == 'POST':
+        album_name = request.POST['album_name']
+        artist_id = request.POST['artist']
+        cover = request.FILES['cover']
+        date = request.POST['date']
+        Album.objects.create(album_name=album_name, artist_id=artist_id, cover=cover, date=date)
+        return HttpResponseRedirect(reverse('album_list'))
+    else:
+        artists = Artist.objects.all()
+        return render(request, 'album/album_create.html', {'artists': artists})
+
+def album_delete(request, pk):
+    album = get_object_or_404(Album, pk=pk)
+    album.delete()
+    return HttpResponseRedirect(reverse('album_list'))
