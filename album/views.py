@@ -40,5 +40,7 @@ def album_create(request):
 
 def album_delete(request, pk):
     album = get_object_or_404(Album, pk=pk)
-    album.delete()
-    return HttpResponseRedirect(reverse('album_list'))
+    if request.method == 'POST':
+        album.delete()
+        return HttpResponseRedirect(reverse('album_list'))
+    return HttpResponseRedirect(reverse('album_list', args=[album.pk]))
