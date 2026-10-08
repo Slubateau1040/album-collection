@@ -7,9 +7,12 @@
     <p>{{ album.date }}</p>
     <img src="{{ album.cover.url }}" alt="{{ album.album_name }}">
 
+
     <form action="{% url 'album_delete' album.id %}" method="post">
     {% csrf_token %}
     <button type="submit">Delete</button>
     </form>
+
+    <a href="{% url 'album_edit' album.id %}">Edit</a>
 
 {% endblock %}

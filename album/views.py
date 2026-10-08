@@ -44,3 +44,23 @@ def album_delete(request, pk):
         album.delete()
         return HttpResponseRedirect(reverse('album_list'))
     return HttpResponseRedirect(reverse('album_list', args=[album.pk]))
+
+def artist_delete(request, pk):
+    artist = get_object_or_404(Artist, pk=pk)
+    if request.method == 'POST':
+        artist.delete()
+        return HttpResponseRedirect(reverse('artist_list'))
+    return HttpResponseRedirect(reverse('artist_list', args=[artist.pk]))
+
+def album_edit(request, pk):
+    album = get_object_or_404(Album, pk=pk)
+    if request.method == 'POST':
+        album.album_name = request.POST['album_name']
+        album.artist_id = request.POST['artist']
+        if 'cover' in request.FILES:
+            album.cover = request.FILES['cover']
+        album.date = request.POST['date']
+        album.save()
+        return HttpResponseRedirect(reverse('album_list'))
+    artists = Artist.objects.all()
+    return render(request, 'album/album_edit.html', {'album': album, 'artists': artists})
