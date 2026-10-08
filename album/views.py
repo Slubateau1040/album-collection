@@ -64,3 +64,8 @@ def album_edit(request, pk):
         return HttpResponseRedirect(reverse('album_list'))
     artists = Artist.objects.all()
     return render(request, 'album/album_edit.html', {'album': album, 'artists': artists})
+
+def artist_detail(request, pk):
+    artist = get_object_or_404(Artist, pk=pk)
+    albums_artist = artist.album_set.all()
+    return render(request, 'album/artist_detail.html', {'artist': artist, 'albums_artist': albums_artist})

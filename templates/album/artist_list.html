@@ -6,11 +6,9 @@
 
     <ul>
     {% for artist in artists %}
-    	<li>{{ artist.artist_name }}</li>
-        <form action="{% url 'artist_delete' artist.id %}" method="post">
-        {% csrf_token %}
-            <input type="submit" value="Delete">
-        </form>
+        <li>
+    	    <a href="{% url 'artist_detail' artist.id %}">{{ artist.artist_name }}</a>
+        </li>
     {% endfor %}
     </ul>
 
